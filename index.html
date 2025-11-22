@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인스타 사진 이어붙이기 - 긴 게시물 만들기</title>
+    <meta
+      name="description"
+      content="여러 장의 사진을 하나로 이어서 인스타그램 긴 게시물을 만드세요. 쓱 넘기는 파노라마 피드를 쉽게 만드는 무료 도구."
+    />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQTBGHNSYB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-DQTBGHNSYB');
+    </script>
+
+    <script>
+      // 로컬 개발 환경(localhost)이 아닐 때만 base href 적용
+      if (
+        window.location.hostname !== "localhost" &&
+        window.location.hostname !== "127.0.0.1"
+      ) {
+        const base = document.createElement("base");
+        base.href = "/ig-seamless-carousel/";
+        document.head.insertBefore(base, document.head.firstChild);
+      }
+    </script>
+
+    <!-- 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="../web-tools-common-assets/toss-ui.js"></script>
+
+    <!-- 스타일 -->
+    <link rel="stylesheet" href="../web-tools-common-assets/toss-ui.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="ad-banner">
+        <span style="font-size: 12px">AD SPACE</span>
+      </div>
+
+      <div class="content-area">
+        <!-- STEP 1: 초기 설정 -->
+        <div id="step-1-setup" class="toss-card active">
+          <div class="card-content">
+            <h1 class="card-title">인스타 사진,<br>쭉 이어붙이기</h1>
+            <p class="card-desc">
+              여러 장의 사진을 하나로 이어서<br>
+              쓱 넘기는 긴 게시물을 만들어요
+            </p>
+          </div>
+          
+          <div class="card-footer-simple">
+            <button id="startUploadButton" class="btn-primary">시작하기</button>
+            <input type="file" id="initialUploadInput" accept="image/*" multiple style="display: none" />
+          </div>
+        </div>
+
+        <!-- STEP 2: 에디터 -->
+        <div id="step-2-editor" class="toss-card">
+          <div class="card-header">
+            <div class="header-controls">
+              <button id="backToSetupButton" class="btn-text">← 처음으로</button>
+              <div class="editor-actions">
+                <div class="color-picker-wrapper">
+                  <label for="bgColorPicker" class="color-label">배경색</label>
+                  <input type="color" id="bgColorPicker" value="#ffffff" title="배경색 변경" />
+                </div>
+                <button id="previewButton" class="btn-primary small">결과 확인</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="editor-main-area">
+            <div class="editor-canvas-container" id="editorCanvasContainer">
+              <div class="scroll-area">
+                <div class="canvas-wrapper" id="canvasWrapper">
+                  <canvas id="fabricCanvas"></canvas>
+                  <div class="canvas-guides-overlay" id="canvasGuides"></div>
+                </div>
+                <button id="addSlideButton" class="add-slide-btn">
+                  <span class="icon">+</span>
+                  <span>추가</span>
+                </button>
+              </div>
+              <button class="canvas-nav-btn prev" id="canvasPrevBtn" aria-label="왼쪽으로 스크롤">‹</button>
+              <button class="canvas-nav-btn next" id="canvasNextBtn" aria-label="오른쪽으로 스크롤">›</button>
+            </div>
+
+            <div class="gallery-tray">
+              <button class="nav-btn prev" id="galleryPrevBtn" aria-label="왼쪽으로 스크롤">‹</button>
+              <div class="gallery-scroll" id="galleryScroll">
+                <!-- Thumbnails will be added here -->
+                <div class="gallery-add-btn" id="galleryAddButton">
+                  <span class="icon">+</span>
+                  <span>사진 추가</span>
+                </div>
+              </div>
+              <button class="nav-btn next" id="galleryNextBtn" aria-label="오른쪽으로 스크롤">›</button>
+              <input type="file" id="imageUploadInput" accept="image/*" multiple style="display: none" />
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: 결과 -->
+        <div id="step-3-result" class="toss-card">
+          <div class="card-content">
+            <h2>완성! 🎉</h2>
+            <p>
+              순서대로 인스타에 올리면<br>
+              쭉 이어지는 사진이 돼요
+            </p>
+            
+            <div id="resultPreviewContainer" class="result-grid">
+              <!-- 결과 이미지가 여기에 들어감 -->
+            </div>
+          </div>
+          <div class="card-footer button-group">
+            <button id="downloadZipButton" class="btn-primary">저장하기</button>
+            <button id="restartButton" class="btn-secondary">처음으로</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
