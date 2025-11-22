@@ -1,0 +1,3 @@
+[submodule "web-tools-common-assets"]
+	path = web-tools-common-assets
+	url = https://github.com/spencer0124/web-tools-common-assets.git
