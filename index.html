@@ -42,9 +42,7 @@
   </head>
   <body>
     <div class="app-container">
-      <div class="ad-banner">
-        <span style="font-size: 12px">AD SPACE</span>
-      </div>
+
 
       <div class="content-area">
         <!-- STEP 1: 초기 설정 -->
@@ -130,5 +128,10 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script>
+      if (window.TossUI) {
+        window.TossUI.checkAndEscapeKakaoInApp();
+      }
+    </script>
   </body>
 </html>

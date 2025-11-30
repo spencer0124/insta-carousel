@@ -467,3 +467,14 @@ input[type="color"]::-moz-color-swatch {
   border: 3px solid #e5e8eb;
   border-radius: 8px;
 }
+
+/* --- Safari 하단 주소창 대응 --- */
+.app-container {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.card-footer,
+.card-footer-simple,
+.card-footer.button-group {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
